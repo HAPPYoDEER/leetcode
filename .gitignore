@@ -1,0 +1,7 @@
+#java bytecode files
+/bin
+
+#eclipse 生成文件
+/.settings
+.classpath
+
