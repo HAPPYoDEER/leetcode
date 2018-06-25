@@ -3,7 +3,7 @@ package com.happydeer.problems.easy;
 import java.util.HashMap;
 
 /**
- *
+ *报数序列是指一个整数序列，按照其中的整数的顺序进行报数，得到下一个数
  *作者：HCK
  *创建日期：2018年6月25日
  */
@@ -19,12 +19,11 @@ public class CountAndSay {
 		if (n == 1) return "1";
 		if (n == 2) return "11";
 		String res = "11";
+		StringBuilder sb = new StringBuilder(); 
+//		StringBuffer sb = new StringBuffer();//不明白使用StringBuilder为什么更耗时
 		for (int i = 2; i < n; i++) {
 			char[] tmp = res.toCharArray();
-			System.out.println("x:" + res);
-//			StringBuilder sb = new StringBuilder(); 
-			StringBuffer sb = new StringBuffer();//不明白使用StringBuilder为什么更耗时
-			HashMap<String, Integer> hp = new HashMap<>();
+			HashMap<String, Integer> hp = new HashMap<>();//天知道我怎么想到用hashmap来存每个数与其个数关系
 			Integer count = 1;
 			hp.put(tmp[0] + "", count);
 			for (int j = 1; j < tmp.length; j++) {
@@ -41,7 +40,7 @@ public class CountAndSay {
 			}
 			sb.append(count).append(tmp[tmp.length-1]);
 			res = sb.toString();
-			sb = null;
+			sb.setLength(0);
 		}
 		return res;
 	}
