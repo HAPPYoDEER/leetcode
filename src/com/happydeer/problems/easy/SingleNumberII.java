@@ -10,17 +10,18 @@ import com.happydeer.util.CommonUtils;
  */
 public class SingleNumberII {
 	public static void main(String[] args) {
-		int[] nums = { 2, 2, 3, 2 };
+		int[] nums = {2, 2, 2, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7};
 		Arrays.sort(nums);
 		CommonUtils.printList(nums);
-		System.out.println(SingleNumberII.mySolution(nums));
+		System.out.println(SingleNumberII.greatSolution(nums));
 
 	}
 
 	public static int mySolution(int[] nums) {
 		int len = nums.length;
-		if (len == 1)
+		if (len == 1) {
 			return nums[0];
+		}
 		Arrays.sort(nums);
 		int res = 0;
 		for (int i = 0; i < len; i++) {
@@ -40,7 +41,9 @@ public class SingleNumberII {
 		return res;
 	}
 	/**
-	 * 大神果然是大神，完全看不懂
+	 *  大神果然是大神，完全看不懂
+	 * ^异或： 如果相对应位值相同，则结果为0，否则为1
+	 * ~按位取反： 按位取反运算符翻转操作数的每一位，即0变成1，1变成0。
 	 * @param nums
 	 * @return
 	 */
