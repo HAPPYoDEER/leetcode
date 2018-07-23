@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import com.happydeer.util.ClassicMath;
+import com.happydeer.util.CommonUtils;
 
 /**
  *
@@ -15,44 +16,88 @@ import com.happydeer.util.ClassicMath;
 public class ThreeSumClosest {
 
 	public static void main(String[] args) {
-		int[] nums = { -4, -7, -2, 2, 5, -2, 1, 9, 3, 9, 4, 9, -9, -3, 7, 4, 1, 0, 8, 5, -7, -7 };
-
-		// int x = ThreeSumClosest.mySolution(nums, 29);
-		System.out.println("阶乘:" + ThreeSumClosest.factorial(21));
-		System.out.println("阶乘:" + ThreeSumClosest.factorial(20));
-		System.out.println("阶乘:" + ThreeSumClosest.factorial(13));
-		System.out.println("阶乘:" + ThreeSumClosest.factorial(12));
-		System.out.println("整型:" + Integer.MAX_VALUE);
-		System.out.println("long:" + Long.MAX_VALUE);
-		System.out.println(" " + ClassicMath.combination(16, 3));
+		// int[] nums = { -4, -7, -2, 2, 5, -2, 1, 9, 3, 9, 4, 9, -9, -3, 7, 4, 1, 0, 8,
+		// 5, -7, -7 };
+//		int[] nums = { -1, 0, 1, 2, -1, -4 };
+		int[] nums = { 1, 4, 5, 6, 7, 8};
+		System.out.println(badSolution2(nums, 0));
 	}
 
+	/**
+	 * 
+	 */
+	public static int badSolution2(int[] nums, int target) {
+		int len = nums.length;
+		Set<Integer> hs = new TreeSet<>();
+		Arrays.sort(nums);
+		CommonUtils.printList(nums);
+		for (int k = 2, a = nums[0], b = nums[1]; k < len; k++) {
+			hs.add(a + b + nums[k]);
+		}
+		for (int k = 1, a = nums[0], c = nums[len - 1]; k < len - 1; k++) {
+			hs.add(a + c + nums[k]);
+		}
+		for (int k = 0, b = nums[len - 2], c = nums[len - 1]; k < len - 2; k++) {
+			hs.add(b + c + nums[k]);
+		}
+		for (int i = 2; i < len -3; i++) {
+			hs.add(nums[i] + nums[i + 1] + nums[i + 2]);
+		}
+		int prev = 0, index = 0;
+		System.out.println(hs.toString());
+		for (Integer i : hs) {
+			int in = i.intValue();
+			if (target == in)
+				return target;
+			if (target < in) {
+				if (index == 0) {
+					return in;
+				} else {
+					return (target - prev) > (in - target) ? in : prev;
+				}
+			}
+			prev = in;
+			index++;
+		}
+		return prev;
+	}
+
+	/**
+	 * 自认逻辑没问题。但是时间超限，未通过leetocde全部测试用例
+	 * 
+	 * @param nums
+	 *            原始数组
+	 * @param target
+	 *            目标值
+	 * @return 结果
+	 */
 	public static int mySolution(int[] nums, int target) {
 		int len = nums.length;
-
-		System.out.println(len + "==" + combination(22, 4));
-		int[] set = new int[10000];
-		int index = 0;
+		Set<Integer> hs = new TreeSet<>();
 		for (int i = 0; i < len - 2; i++) {
 			for (int j = i + 1; j < len - 1; j++) {
 				for (int k = j + 1; k < len; k++) {
-					set[index++] = nums[i] + nums[j] + nums[k];
+					int tmp = nums[i] + nums[j] + nums[k];
+					hs.add(Integer.valueOf(tmp));
 				}
 			}
 		}
-		Arrays.sort(set);
-		for (int i = 0; i < set.length; i++) {
-			if (target == set[i])
-				break;
-			if (target > set[i] & i < set.length - 1 && target < set[i + 1]) {
-				return set[i + 1] - 1 > target - set[i] ? set[i] : set[i + 1];
+		int index = 0, prev = 0;
+		for (Integer i : hs) {
+			int in = i.intValue();
+			if (target == in)
+				return target;
+			if (target < in & index > 0) {
+				if (index == 0) {
+					return in;
+				} else {
+					return (target - prev) > (in - target) ? in : prev;
+				}
 			}
-			if (target > set[i] & i == set.length - 1) {
-				return set[i];
-			}
+			prev = in;
+			index++;
 		}
-		return target;
-
+		return prev;
 	}
 
 	public static long factorial(int n) {
