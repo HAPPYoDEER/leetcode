@@ -1,12 +1,9 @@
 package com.happydeer.problems.easy;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import com.happydeer.util.ClassicMath;
 import com.happydeer.util.CommonUtils;
 
 /**
