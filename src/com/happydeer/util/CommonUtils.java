@@ -10,7 +10,7 @@ public class CommonUtils {
 	public static void printList(Comparable[] arr) {
 		System.out.print("{");
 		for (Comparable a : arr) {
-			System.out.println(a.toString());
+			System.out.print(a.toString() + ",");
 		}
 		System.out.println("}");
 		
