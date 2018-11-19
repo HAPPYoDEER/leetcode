@@ -5,10 +5,7 @@ package com.happydeer.problems.easy;
  * 作者：HCK 创建日期：2018年9月12日
  */
 public class ClimbStairs {
-	public static void main(String[] args) {
-		System.out.println(solution(38));
-		
-	}
+	
 
 	/**
 	 * em。。。。
@@ -55,5 +52,23 @@ public class ClimbStairs {
 			a = b - a;
 		}
 		return b;
+	}
+	
+	public static int cyc(int n) {
+		if (n == 1) {
+			return 1;
+		}
+		if (n == 2) {
+			return 2;
+		}
+		return cyc(n -1) + cyc(n - 2);
+	}
+	
+	public static void main(String[] args) {
+		int n = 3;
+		System.out.println(greatSolution(n));
+		
+		System.out.println(cyc(n));
+		
 	}
 }
