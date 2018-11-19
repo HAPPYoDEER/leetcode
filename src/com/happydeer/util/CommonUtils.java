@@ -17,9 +17,11 @@ public class CommonUtils {
 	}
 	public static void printList(int[] arr) {
 		System.out.print("arr：{");
-		for (int i : arr) {
-			System.out.print(i + ", ");
+		int i = 0;
+		while (i < arr.length - 1) {
+			System.out.print(arr[i] + ",");
+			i++;
 		}
-		System.out.println("}");
+		System.out.println(arr[arr.length - 1] + "}");
 	}
 }
